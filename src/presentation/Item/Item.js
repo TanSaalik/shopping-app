@@ -1,5 +1,4 @@
 import React from 'react';
-import LocalMallIcon from '@material-ui/icons/LocalMall';
 import {makeStyles, useTheme} from "@material-ui/core/styles";
 
 const Item = ({
@@ -12,14 +11,20 @@ const Item = ({
 
     return (
         <>
-            <div className={classes.itemContainer}>
-                <div className={classes.imageContainer}>
-                    <img src={image} className={classes.itemImage}/>
-                </div>
-                <div className={classes.itemDetailsContainer}>
-                    <h3 className={classes.alignLeft}>{itemName}</h3>
-                    <p className={classes.alignLeft}>{description}</p>
-                </div>
+            <div className={image ? classes.itemContainer : classes.itemContainerNoImage}>
+                {image ?
+                    <>
+                        <div className={classes.imageContainer}>
+                            <img src={image} className={classes.itemImage}/>
+                        </div>
+                        <div className={classes.itemDetailsContainer}>
+                            <h3 className={classes.alignLeft}>{itemName}</h3>
+                            <p className={classes.alignLeft}>{description}</p>
+                        </div>
+                    </>
+                    :
+                    <p className={classes.alignLeft}>{itemName}</p>
+                }
             </div>
         </>
     );
@@ -30,6 +35,15 @@ const useStyles = makeStyles({
         display: 'flex',
         maxWidth: 400,
         minHeight: 100,
+        marginTop: 10,
+        padding: 10,
+        backgroundColor: '#ededed',
+        boxShadow: '3px 5px 5px lightgray',
+    },
+    itemContainerNoImage: {
+        display: 'flex',
+        maxWidth: 400,
+        minHeight: 30,
         marginTop: 10,
         padding: 10,
         backgroundColor: '#ededed',
