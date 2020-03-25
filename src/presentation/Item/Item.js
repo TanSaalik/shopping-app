@@ -1,30 +1,34 @@
 import React from 'react';
 import {makeStyles, useTheme} from "@material-ui/core/styles";
+import IncreaseDecreaseButtonGroup from '../IncreaseDecreaseButtonGroup/IncreaseDecreaseButtonGroup';
 
 const Item = ({
-    itemName,
-    image,
-    description
+    item,
+    handleIncrement,
+    itemsList,
+    setItemsList,
 }) => {
     const theme = useTheme();
     const classes = useStyles(theme);
 
     return (
         <>
-            <div className={image ? classes.itemContainer : classes.itemContainerNoImage}>
-                {image ?
-                    <>
-                        <div className={classes.imageContainer}>
-                            <img src={image} className={classes.itemImage}/>
-                        </div>
-                        <div className={classes.itemDetailsContainer}>
-                            <h3 className={classes.alignLeft}>{itemName}</h3>
-                            <p className={classes.alignLeft}>{description}</p>
-                        </div>
-                    </>
-                    :
-                    <p className={classes.alignLeft}>{itemName}</p>
-                }
+            <div className={classes.itemContainer}>
+                <div className={classes.imageContainer}>
+                    <img alt={'itemImage'} src={item.image} className={classes.itemImage}/>
+                </div>
+                <div className={classes.itemDetailsContainer}>
+                    <h3 className={classes.alignLeft}>{item.itemName}</h3>
+                    <p className={classes.alignLeft}>{item.description}</p>
+                    <p>{item.shoppingCount}</p>
+                </div>
+                <div className={classes.buttonGroupContainer}>
+                    <IncreaseDecreaseButtonGroup
+                        handleIncrement={handleIncrement}
+                        item={item}
+                        itemsList={itemsList}
+                        setItemsList={setItemsList}/>
+                </div>
             </div>
         </>
     );
@@ -53,11 +57,11 @@ const useStyles = makeStyles({
         textAlign: 'left',
     },
     imageContainer: {
-        flexBasis: '33.33%',
+        flexBasis: '30%',
         backgroundColor: 'white'
     },
     itemDetailsContainer: {
-        flexBasis: '66.66%',
+        flexBasis: '60%',
         marginLeft: 10
     },
     itemImage: {
@@ -67,7 +71,11 @@ const useStyles = makeStyles({
         maxWidth: 100,
         maxHeight: 100,
         transform: 'translate(-50%, -50%)'
-    }
+    },
+    buttonGroupContainer: {
+        flexBasis: '10%',
+        marginLeft: 'auto',
+    },
 })
 
 export default Item;

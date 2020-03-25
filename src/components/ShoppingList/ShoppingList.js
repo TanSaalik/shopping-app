@@ -1,22 +1,27 @@
 import React from 'react';
 import Item from "../../presentation/Item/Item";
 import {makeStyles, useTheme} from "@material-ui/core/styles";
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
-const ShoppingList = () => {
+const ShoppingList = ({
+    handleIncrement,
+    shoppingList,
+    setShoppingList
+}) => {
     const theme = useTheme();
     const classes = useStyles(theme);
 
     return (
         <div className={classes.itemsList}>
-            <h3>Shopping list</h3>
-            <Item
-                itemName={'Item1'}
-                description={'The first item'}
-            />
-            <Item
-                itemName={'Item2'}
-                description={'This is the second item item item'}
-            />
+            <h3><ShoppingCartIcon/> Shopping list</h3>
+            {shoppingList.map(item =>
+                <Item
+                    item={item}
+                    handleIncrement={handleIncrement}
+                    itemsList={shoppingList}
+                    setItemsList={setShoppingList}
+                />
+            )}
         </div>
     );
 }
