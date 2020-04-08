@@ -40,14 +40,14 @@ const App = () => {
         }
     ]);
 
-    const handleIncrement = (list, setList, itemName) => {
+    const handleIncrement = (list, setList, incrementedItem) => {
         const safeList = [...list];
-        if (safeList.some(item => item.itemName === itemName)){
-            const index = safeList.findIndex(item => item.itemName === itemName);
+        if (safeList.some(item => item.itemName === incrementedItem.itemName)){
+            const index = safeList.findIndex(item => item.itemName === incrementedItem.itemName);
             safeList[index].shoppingCount++;
             setList(safeList);
         } else {
-            safeList.push({itemName: itemName, shoppingCount: 1});
+            safeList.push({...incrementedItem, shoppingCount: 1});
             setList(safeList);
         }
     }

@@ -26,7 +26,7 @@ const useStyles = makeStyles({
         minHeight: 30,
         marginTop: 10,
         padding: 10,
-        backgroundColor: '#ededed',
+        backgroundColor: '#A3B2C3',
         boxShadow: '3px 5px 5px lightgray',
     },
     alignLeft: {

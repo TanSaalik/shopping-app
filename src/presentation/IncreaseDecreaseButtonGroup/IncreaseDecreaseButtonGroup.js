@@ -20,7 +20,7 @@ const IncreaseDecreaseButtonGroup = ({
             orientation="vertical"
             aria-label="outlined small button group"
         >
-            <Button onClick={() => handleIncrement(itemsList, setItemsList, item.itemName)}><AddIcon fontSize="small"/></Button>
+            <Button onClick={() => handleIncrement(itemsList, setItemsList, item)}><AddIcon fontSize="small"/></Button>
             <Button onClick={() => ""}><RemoveIcon fontSize="small"/></Button>
         </ButtonGroup>
     );
@@ -31,7 +31,7 @@ const useStyles = makeStyles({
         position: 'relative',
         top: '50%',
         transform: 'translate(0, -50%)',
-        backgroundColor: 'white'
+        backgroundColor: '#486587'
     },
 })
 
