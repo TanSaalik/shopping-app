@@ -3,6 +3,9 @@ import ItemsList from "./components/ItemsList/ItemsList";
 import {makeStyles, useTheme} from "@material-ui/core/styles";
 import ShoppingList from "./components/ShoppingList/ShoppingList";
 import StockList from "./components/StockList/StockList";
+import {connect} from 'react-redux';
+import * as actions from "./actions";
+import _ from 'lodash';
 
 const App = () => {
     const theme = useTheme();
@@ -40,6 +43,21 @@ const App = () => {
         }
     ]);
 
+    const renderToDo = () => {
+        const {data} = this.props;
+        const shoppingItems = _.map(data, (value, key) => {
+            return <div> {`${key} asd ${value}`} </div>;
+        });
+        if (!_.isEmpty(shoppingItems)) {
+            return shoppingItems;
+        }
+        return (
+            <div>
+                <h4>You have no more things</h4>
+            </div>
+        );
+    }
+
     const handleIncrement = (list, setList, incrementedItem) => {
         const safeList = [...list];
         if (safeList.some(item => item.itemName === incrementedItem.itemName)){
@@ -48,6 +66,7 @@ const App = () => {
             setList(safeList);
         } else {
             safeList.push({...incrementedItem, shoppingCount: 1});
+            actions.addShoppingItem({...incrementedItem, shoppingCount: 1});
             setList(safeList);
         }
     }
@@ -69,8 +88,15 @@ const App = () => {
                 stockList={stockList}
                 setStockList={setStockList}
                 handleIncrement={handleIncrement}/>
+            renderToDo();
         </div>
     );
+}
+
+const mapStateToProps = ({data}) => {
+    return {
+        data
+    }
 }
 
 const useStyles = makeStyles({
@@ -84,4 +110,4 @@ const useStyles = makeStyles({
     }
 })
 
-export default App;
+export default connect(mapStateToProps, actions)(App);
